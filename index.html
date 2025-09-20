@@ -5,6 +5,305 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infamous Online Casino | Play for Fun</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional styles for the index page */
+        .hero {
+            text-align: center;
+            padding: 5rem 1rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        radial-gradient(circle at center, #8E0E00 0%, transparent 70%);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            color: #ccc;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .hero-buttons button {
+            background: #8E0E00;
+            color: #fff;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 1px solid #cba135;
+        }
+
+        .hero-buttons button:hover {
+            transform: translateY(-5px);
+            background: #a81100;
+            box-shadow: 0 10px 20px rgba(142, 14, 0, 0.3);
+        }
+
+        .btn-signup {
+            background: linear-gradient(135deg, #1F1C18, #8E0E00) !important;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 5%;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(203, 161, 53, 0.2);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #8E0E00;
+            box-shadow: 0 10px 25px rgba(142, 14, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #cba135;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* Promotions Section */
+        .promotions {
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a0c0c 100%);
+        }
+
+        .promotions h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #cba135;
+        }
+
+        .promo-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .promo-card {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 2px solid #8E0E00;
+            text-align: center;
+        }
+
+        .promo-card h3 {
+            color: #cba135;
+            margin-bottom: 1rem;
+        }
+
+        .promo-card p {
+            color: #ddd;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .promo-card button {
+            background: linear-gradient(135deg, #8E0E00, #1F1C18);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .promo-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 14, 0, 0.3);
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 5%;
+        }
+
+        .about h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #cba135;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .key-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .fact {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(203, 161, 53, 0.2);
+        }
+
+        .fact h4 {
+            color: #cba135;
+            margin-bottom: 1rem;
+        }
+
+        .fact p {
+            color: #ccc;
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        /* Game Links */
+        .game-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .coming-soon {
+            opacity: 0.7;
+            position: relative;
+        }
+
+        .coming-soon::after {
+            content: 'COMING SOON';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #cba135;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid #cba135;
+        }
+
+        /* Footer */
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .footer-section h4 {
+            color: #cba135;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #cba135;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        /* User Account */
+        #user-greeting {
+            color: #cba135;
+            font-weight: 500;
+            margin-right: 1rem;
+        }
+
+        #logout-button {
+            background: #333;
+            color: #ccc;
+            border: 1px solid #666;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        #logout-button:hover {
+            background: #444;
+            color: #fff;
+        }
+
+        /* Game Card Paragraph */
+        .game-card p {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+    </style>
 </head>
 <body>
 
@@ -167,6 +466,7 @@
         </footer>
     </div>
 
+    <script src="script.js"></script>
     <script>
         // Enhanced user state management with chip tracking
         function checkUserState() {
