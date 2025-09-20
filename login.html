@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Infamous Online Casino</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .auth-container {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 3px solid #8E0E00;
+            box-shadow: 0 0 30px rgba(142, 14, 0, 0.4);
+            width: 100%;
+            max-width: 450px;
+        }
+        .logo {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #cba135;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #cba135;
+            font-size: 1.8rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ddd;
+            font-weight: 500;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #cba135;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to right, #8E0E00, #1F1C18);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(to right, #a81100, #2b2620);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 14, 0, 0.3);
+        }
+        .switch-auth {
+            text-align: center;
+            margin-top: 2rem;
+            color: #999;
+        }
+        .switch-auth a {
+            color: #cba135;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .switch-auth a:hover {
+            text-decoration: underline;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #ccc;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid #666;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .back-button:hover {
+            background: #333;
+            color: #fff;
+        }
+        .error-message {
+            color: #ff4444;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .forgot-password {
+            text-align: right;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .forgot-password a {
+            color: #cba135;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="logo">Infamous</div>
+        <h1>Welcome Back</h1>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label for="login-username">Username or Email</label>
+                <input type="text" id="login-username" name="username" required placeholder="Enter your username or email">
+                <div class="error-message" id="login-error"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" required placeholder="Enter your password">
+                <div class="forgot-password">
+                    <a href="#">Forgot Password?</a>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-primary">Log In</button>
+        </form>
+        
+        <div class="switch-auth">
+            Don't have an account? <a href="signup.html">Sign Up</a>
+        </div>
+        
+        <div class="button-container">
+            <a href="index.html" class="back-button">← Back to Lobby</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset error message
+            document.getElementById('login-error').style.display = 'none';
+            document.getElementById('login-error').textContent = '';
+
+            // Get form values
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value;
+
+            // Try to find user in localStorage
+            let user = null;
+            
+            // Check if input is email or username
+            const isEmail = username.includes('@');
+            
+            if (isEmail) {
+                // Search by email (this is simplified for demo)
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith('user_')) {
+                        const userData = JSON.parse(localStorage.getItem(key));
+                        if (userData.email === username) {
+                            user = userData;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                // Search by username
+                user = JSON.parse(localStorage.getItem('user_' + username));
+            }
+
+            // Validate credentials
+            if (!user) {
+                document.getElementById('login-error').textContent = 'User not found. Please check your username/email or sign up.';
+                document.getElementById('login-error').style.display = 'block';
+                return;
+            }
+
+            if (user.password !== password) {
+                document.getElementById('login-error').textContent = 'Incorrect password. Please try again.';
+                document.getElementById('login-error').style.display = 'block';
+                return;
+            }
+
+            // Successful login
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            alert('Login successful! Welcome back, ' + user.username + '!');
+            window.location.href = 'index.html';
+        });
+
+        // Demo accounts for testing (optional)
+        window.onload = function() {
+            // Create demo accounts if they don't exist
+            const demoAccounts = [
+                {
+                    username: 'demo',
+                    email: 'demo@infamous.com',
+                    password: 'password123',
+                    birthdate: '1990-01-01',
+                    chips: 5000000,
+                    joined: new Date().toISOString()
+                }
+            ];
+
+            demoAccounts.forEach(account => {
+                if (!localStorage.getItem('user_' + account.username)) {
+                    localStorage.setItem('user_' + account.username, JSON.stringify(account));
+                }
+            });
+        };
+    </script>
+</body>
+</html>
