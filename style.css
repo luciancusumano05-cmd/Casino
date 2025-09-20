@@ -7,7 +7,7 @@
 }
 
 body {
-    background: linear-gradient(135deg, #1a2a6c, #2b5876);
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* Deep dark blue/purple gradient */
     color: #fff;
     min-height: 100vh;
 }
@@ -31,26 +31,28 @@ body {
 }
 
 .age-gate-content {
-    background: #222;
+    background: #1a1a1a;
     padding: 3rem;
     border-radius: 10px;
     text-align: center;
     max-width: 500px;
-    border: 2px solid gold;
+    border: 2px solid #cba135; /* Gold border */
+    box-shadow: 0 0 25px rgba(203, 161, 53, 0.5);
 }
 
 .age-gate-content h2 {
     margin-bottom: 1rem;
-    color: gold;
+    color: #cba135; /* Gold */
 }
 
 .age-gate-content p {
     margin-bottom: 1.5rem;
     line-height: 1.5;
+    color: #ddd;
 }
 
 .age-gate-content button {
-    background: linear-gradient(to right, #4caf50, #2e7d32);
+    background: linear-gradient(to right, #8E0E00, #1F1C18); /* Dark red gradient */
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -63,10 +65,11 @@ body {
 
 .age-gate-content button:hover {
     transform: scale(1.05);
+    background: linear-gradient(to right, #a81100, #2b2620);
 }
 
 .btn-exit {
-    background: linear-gradient(to right, #f44336, #b71c1c) !important;
+    background: linear-gradient(to right, #2c3e50, #1a1a1a) !important; /* Dark gray/blue */
 }
 
 /* Main Website Header */
@@ -75,14 +78,15 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-bottom: 2px solid gold;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-bottom: 2px solid #8E0E00; /* Infamous red */
 }
 
 .logo {
     font-size: 1.8rem;
     font-weight: bold;
-    color: gold;
+    color: #cba135; /* Gold */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 nav a {
@@ -93,7 +97,7 @@ nav a {
 }
 
 nav a:hover {
-    color: gold;
+    color: #8E0E00; /* Red on hover */
 }
 
 .user-account {
@@ -103,57 +107,68 @@ nav a:hover {
 }
 
 .chips {
-    background: linear-gradient(135deg, #8e2de2, #4a00e0);
+    background: linear-gradient(135deg, #8E0E00, #1F1C18); /* Dark red gradient */
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-weight: bold;
+    border: 1px solid #cba135;
 }
 
 .user-account button {
-    background-color: gold;
-    color: #1a2a6c;
+    background-color: #cba135; /* Gold */
+    color: #1a1a1a; /* Dark text */
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.user-account button:hover {
+    background-color: #e0b53d;
 }
 
 /* Hero Section */
 .hero {
     text-align: center;
     padding: 5rem 1rem;
-    background: url('https://placehold.co/1200x400/222/white?text=Lucky+Casino+Banner') no-repeat center center/cover;
+    background: url('https://placehold.co/1200x400/222/white?text=Infamous+Online+Casino') no-repeat center center/cover;
     background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .hero p {
     font-size: 1.2rem;
     max-width: 700px;
     margin: 0 auto 2rem auto;
+    color: #ccc;
 }
 
 .hero button {
-    background: gold;
-    color: #1a2a6c;
+    background: #8E0E00;
+    color: #fff;
     border: none;
     padding: 1rem 2.5rem;
     font-size: 1.2rem;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    transition: transform 0.3s;
+    transition: all 0.3s;
+    border: 1px solid #cba135;
 }
 
 .hero button:hover {
     transform: translateY(-5px);
+    background: #a81100;
+    box-shadow: 0 10px 20px rgba(142, 14, 0, 0.3);
 }
 
 /* Game Lobby */
@@ -165,6 +180,7 @@ nav a:hover {
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2.5rem;
+    color: #cba135;
 }
 
 .games-container {
@@ -174,22 +190,23 @@ nav a:hover {
 }
 
 .game-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     padding: 1.5rem;
     text-align: center;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s;
+    border: 1px solid rgba(203, 161, 53, 0.3);
+    transition: all 0.3s;
 }
 
 .game-card:hover {
     transform: translateY(-10px);
-    border-color: gold;
+    border-color: #8E0E00;
+    box-shadow: 0 10px 25px rgba(142, 14, 0, 0.2);
 }
 
 .game-placeholder {
-    background: #333;
+    background: #1a1a1a;
     height: 150px;
     border-radius: 8px;
     display: flex;
@@ -198,17 +215,23 @@ nav a:hover {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
-    color: #aaa;
+    color: #cba135;
+    border: 1px solid #333;
+}
+
+.game-card h3 {
+    color: #ddd;
 }
 
 /* Footer */
 footer {
-    background-color: #111;
+    background-color: #0f0c29;
     text-align: center;
     padding: 2rem 5%;
     margin-top: 3rem;
     font-size: 0.9rem;
     color: #999;
+    border-top: 1px solid #2a2a2a;
 }
 
 footer p {
