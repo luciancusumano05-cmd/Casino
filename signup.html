@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Infamous Online Casino</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .signup-container {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 3px solid #8E0E00;
+            box-shadow: 0 0 30px rgba(142, 14, 0, 0.4);
+            width: 100%;
+            max-width: 500px;
+        }
+        .logo {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #cba135;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #cba135;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ddd;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"] {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 1rem;
+        }
+        input:focus {
+            outline: none;
+            border-color: #cba135;
+        }
+        .btn-signup {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to right, #8E0E00, #1F1C18);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+        .btn-signup:hover {
+            background: linear-gradient(to right, #a81100, #2b2620);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 14, 0, 0.3);
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 2rem;
+            color: #999;
+        }
+        .login-link a {
+            color: #cba135;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #ccc;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid #666;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background: #333;
+            color: #fff;
+        }
+        .terms {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo">Infamous</div>
+        <h1>Create Your Account</h1>
+        
+        <form id="signup-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthdate">Date of Birth</label>
+                <input type="date" id="birthdate" name="birthdate" required>
+            </div>
+            
+            <button type="submit" class="btn-signup">Become Infamous</button>
+        </form>
+        
+        <div class="terms">
+            By signing up, you confirm you are 18+ and agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+        </div>
+        
+        <div class="login-link">
+            Already have an account? <a href="#">Log In</a>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="index.html" class="back-button">← Back to Lobby</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            const today = new Date();
+            const age = today.getFullYear() - birthdate.getFullYear();
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            if (age < 18) {
+                alert('You must be 18 years or older to sign up.');
+                return;
+            }
+            
+            // Simulate successful signup
+            alert('Account created successfully! Welcome to Infamous Online Casino.');
+            // Redirect to homepage (in a real app, you'd log them in here)
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
