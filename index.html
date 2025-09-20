@@ -30,26 +30,31 @@
             </nav>
             <div class="user-account">
                 <div class="chips">🪙 1,000,000</div>
-                <button>Login / Sign Up</button>
+                <button onclick="location.href='signup.html'">Login / Sign Up</button>
             </div>
         </header>
 
         <main>
             <section class="hero">
-                <h1>Become Legendary.</h1>
-                <p>Experience the thrill of the infamous. Win massive fortunes in play-money chips across our premium games. No risk, all reward.</p>
-                <button>Play Now</button>
+                <div class="hero-content">
+                    <h1>Become Legendary.</h1>
+                    <p>Experience the thrill of the infamous. Win massive fortunes in play-money chips across our premium games. No risk, all reward.</p>
+                    <div class="hero-buttons">
+                        <button onclick="location.href='#game-lobby'">Play Now</button>
+                        <button onclick="location.href='signup.html'" class="btn-signup">Sign Up</button>
+                    </div>
+                </div>
             </section>
 
-            <section class="game-lobby">
+            <section class="game-lobby" id="game-lobby">
                 <h2>Featured Games</h2>
-               <a href="slots.html" style="text-decoration: none; color: inherit;"> <!-- Add this line -->
-    <div class="game-card">
-        <div class="game-placeholder">SLOTS</div>
-        <h3>Infamous Riches</h3>
-    </div>
-</a> <!-- And this line -->
-                    </div>
+                <div class="games-container">
+                    <a href="slots.html" style="text-decoration: none; color: inherit;">
+                        <div class="game-card">
+                            <div class="game-placeholder">SLOTS</div>
+                            <h3>Infamous Riches</h3>
+                        </div>
+                    </a>
                     <div class="game-card">
                         <div class="game-placeholder">BLACKJACK</div>
                         <h3>Notorious 21</h3>
