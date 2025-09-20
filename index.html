@@ -1,97 +1,250 @@
-<script>
-/**
- * Shared user-state utilities
- * --------------------------------
- * Each user record in localStorage has the form:
- *   {
- *     username: "playerName",
- *     chips: 1000000,
- *     wins: 0,
- *     losses: 0
- *   }
- *
- * `slots.html` should update currentUser.chips / wins / losses,
- * e.g. after a spin:  currentUser.chips += 500;  saveUser(currentUser);
- */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infamous Online Casino | Play for Fun</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-// Load the logged-in user object or null
-function getCurrentUser() {
-    return JSON.parse(localStorage.getItem('currentUser')) || null;
-}
+    <!-- Age Verification Overlay -->
+    <div id="age-verification">
+        <div class="age-gate-content">
+            <h2>Welcome to Infamous</h2>
+            <p>You must be 18 or older to enter this social casino site.</p>
+            <p>Our games use play-money chips with no real value.</p>
+            <button onclick="verifyAge()">I am 18 or older</button>
+            <button onclick="rejectAge()" class="btn-exit">I am under 18</button>
+        </div>
+    </div>
 
-// Persist updates to localStorage
-function saveUser(user) {
-    localStorage.setItem('currentUser', JSON.stringify(user));
-}
+    <!-- Main Website Content (Hidden until age is verified) -->
+    <div id="main-content" class="hidden">
+        <header>
+            <div class="logo" onclick="location.href='index.html'">Infamous Online Casino</div>
+            <nav>
+                <a href="#game-lobby">Games</a>
+                <a href="#promotions">Promotions</a>
+                <a href="#about">About</a>
+            </nav>
+            <div class="user-account">
+                <div class="chips" id="header-chips">🪙 1,000,000</div>
+                <div id="user-greeting">Welcome, Guest!</div>
+                <button id="auth-button" onclick="handleAuth()">Login / Sign Up</button>
+                <button id="logout-button" class="hidden" onclick="logout()">Logout</button>
+            </div>
+        </header>
 
-// Called once on page load
-function checkUserState() {
-    const user = getCurrentUser();
-    const authButton = document.getElementById('auth-button');
-    const logoutButton = document.getElementById('logout-button');
-    const userGreeting = document.getElementById('user-greeting');
-    const headerChips = document.getElementById('header-chips');
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Become Legendary.</h1>
+                    <p>Experience the thrill of the infamous. Win massive fortunes in play-money chips across our premium games. No risk, all reward.</p>
+                    <div class="hero-buttons">
+                        <button onclick="location.href='#game-lobby'">Play Now</button>
+                        <button onclick="location.href='signup.html'" class="btn-signup">Sign Up & Get 1M Chips!</button>
+                    </div>
+                </div>
+            </section>
 
-    if (user) {
-        userGreeting.textContent = `Welcome, ${user.username}!`;
-        headerChips.textContent = `🪙 ${user.chips.toLocaleString()}`;
-        authButton.classList.add('hidden');
-        logoutButton.classList.remove('hidden');
-    } else {
-        userGreeting.textContent = 'Welcome, Guest!';
-        headerChips.textContent = '🪙 1,000,000';
-        authButton.classList.remove('hidden');
-        logoutButton.classList.add('hidden');
-    }
-}
+            <section class="features">
+                <div class="features-container">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎰</div>
+                        <h3>Premium Games</h3>
+                        <p>Enjoy our collection of high-quality slots, blackjack, roulette, and poker games.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>100% Safe</h3>
+                        <p>Play with fake money in a secure environment. No real gambling or financial risk.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎁</div>
+                        <h3>Daily Bonuses</h3>
+                        <p>Log in every day to claim free chips and unlock special rewards.</p>
+                    </div>
+                </div>
+            </section>
 
-function handleAuth() {
-    const user = getCurrentUser();
-    if (user) {
-        alert(`Welcome back, ${user.username}!`);
-    } else {
-        // send to your existing login/signup pages
-        window.location.href = 'login.html';
-    }
-}
+            <section class="game-lobby" id="game-lobby">
+                <h2>Featured Games</h2>
+                <div class="games-container">
+                    <a href="slots.html" class="game-link">
+                        <div class="game-card">
+                            <div class="game-placeholder">🎰</div>
+                            <h3>Infamous Riches</h3>
+                            <p>Spin to win big with our most popular slot game!</p>
+                        </div>
+                    </a>
+                    <div class="game-card coming-soon">
+                        <div class="game-placeholder">♠️</div>
+                        <h3>Notorious 21</h3>
+                        <p>Classic Blackjack with a dangerous twist. Coming Soon!</p>
+                    </div>
+                    <div class="game-card coming-soon">
+                        <div class="game-placeholder">🎡</div>
+                        <h3>Outlaw Roulette</h3>
+                        <p>Place your bets and watch the wheel spin. Coming Soon!</p>
+                    </div>
+                    <div class="game-card coming-soon">
+                        <div class="game-placeholder">🃏</div>
+                        <h3>Renegade Poker</h3>
+                        <p>Texas Hold'em for high rollers. Coming Soon!</p>
+                    </div>
+                </div>
+            </section>
 
-function logout() {
-    localStorage.removeItem('currentUser');
-    alert('You have been logged out successfully.');
-    checkUserState();
-}
+            <section class="promotions" id="promotions">
+                <h2>Hot Promotions</h2>
+                <div class="promo-container">
+                    <div class="promo-card">
+                        <h3>🎉 Welcome Bonus</h3>
+                        <p>Sign up today and get <strong>1,000,000 FREE CHIPS</strong> to start playing!</p>
+                        <button onclick="location.href='signup.html'">Claim Bonus</button>
+                    </div>
+                    <div class="promo-card">
+                        <h3>⭐ Daily Login</h3>
+                        <p>Log in every day to claim increasing rewards. Day 7: <strong>500,000 chips!</strong></p>
+                        <button onclick="checkLogin()">Check Reward</button>
+                    </div>
+                    <div class="promo-card">
+                        <h3>🏆 Leaderboards</h3>
+                        <p>Compete with other players and win massive chip bonuses every week!</p>
+                        <button onclick="showLeaderboard()">View Rankings</button>
+                    </div>
+                </div>
+            </section>
 
-function checkLogin() {
-    const user = getCurrentUser();
-    if (!user) {
-        alert('Please sign up or log in to claim daily rewards!');
-        window.location.href = 'signup.html';
-    } else {
-        alert('Daily reward feature coming soon! Check back tomorrow.');
-    }
-}
+            <section class="about" id="about">
+                <h2>About Infamous Casino</h2>
+                <div class="about-content">
+                    <p>Infamous Online Casino is the ultimate social gaming destination for players who want to experience the thrill of casino games without any financial risk. Our platform offers a wide variety of games using play-money chips that have no real-world value.</p>
+                    
+                    <div class="key-facts">
+                        <div class="fact">
+                            <h4>🎯 100% Fake Money</h4>
+                            <p>All games use play-money chips only. No real money gambling.</p>
+                        </div>
+                        <div class="fact">
+                            <h4>🔞 18+ Only</h4>
+                            <p>You must be 18 years or older to access our games.</p>
+                        </div>
+                        <div class="fact">
+                            <h4>🎮 Pure Entertainment</h4>
+                            <p>Practice your skills and enjoy the social casino experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-function showLeaderboard() {
-    alert('Leaderboards are coming soon! Compete with other players for massive chip bonuses.');
-}
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Infamous Casino</h4>
+                    <p>The ultimate social gaming experience with no financial risk. Play for fun, become legendary.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#game-lobby">Games</a>
+                    <a href="#promotions">Promotions</a>
+                    <a href="#about">About</a>
+                    <a href="login.html">Login</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Responsible Gaming</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 Infamous Online Casino. This is a social gaming site for entertainment purposes only. No real money gambling or prizes are offered on this site. You must be 18+ to access this site.</p>
+                <p>Practice or success at social casino gaming does not imply future success at real money gambling.</p>
+            </div>
+        </footer>
+    </div>
 
-// Age gate
-function verifyAge() {
-    localStorage.setItem('ageVerified', 'true');
-    document.getElementById('age-verification').style.display = 'none';
-    document.getElementById('main-content').classList.remove('hidden');
-}
-function rejectAge() {
-    alert('You must be 18 or older to enter.');
-    window.location.href = 'https://www.google.com';
-}
+    <script>
+        // --- Coin / User System -------------------------------------
 
-// Init
-window.addEventListener('load', () => {
-    checkUserState();
-    if (localStorage.getItem('ageVerified') === 'true') {
-        document.getElementById('age-verification').style.display = 'none';
-        document.getElementById('main-content').classList.remove('hidden');
-    }
-});
-</script>
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('currentUser')) || null;
+        }
+
+        function saveUser(user) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+
+        function checkUserState() {
+            const user = getCurrentUser();
+            const authButton   = document.getElementById('auth-button');
+            const logoutButton = document.getElementById('logout-button');
+            const userGreeting = document.getElementById('user-greeting');
+            const headerChips  = document.getElementById('header-chips');
+
+            if (user) {
+                userGreeting.textContent = `Welcome, ${user.username}!`;
+                headerChips.textContent  = `🪙 ${user.chips.toLocaleString()}`;
+                authButton.classList.add('hidden');
+                logoutButton.classList.remove('hidden');
+            } else {
+                userGreeting.textContent = 'Welcome, Guest!';
+                headerChips.textContent  = '🪙 1,000,000';
+                authButton.classList.remove('hidden');
+                logoutButton.classList.add('hidden');
+            }
+        }
+
+        function handleAuth() {
+            const user = getCurrentUser();
+            if (user) {
+                alert(`Welcome back, ${user.username}!`);
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            alert('You have been logged out successfully.');
+            checkUserState();
+        }
+
+        function checkLogin() {
+            const user = getCurrentUser();
+            if (!user) {
+                alert('Please sign up or log in to claim daily rewards!');
+                window.location.href = 'signup.html';
+            } else {
+                alert('Daily reward feature coming soon! Check back tomorrow.');
+            }
+        }
+
+        function showLeaderboard() {
+            alert('Leaderboards are coming soon! Compete with other players for massive chip bonuses.');
+        }
+
+        function verifyAge() {
+            localStorage.setItem('ageVerified', 'true');
+            document.getElementById('age-verification').style.display = 'none';
+            document.getElementById('main-content').classList.remove('hidden');
+        }
+
+        function rejectAge() {
+            alert('You must be 18 or older to enter.');
+            window.location.href = 'https://www.google.com';
+        }
+
+        window.addEventListener('load', () => {
+            checkUserState();
+            if (localStorage.getItem('ageVerified') === 'true') {
+                document.getElementById('age-verification').style.display = 'none';
+                document.getElementById('main-content').classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
