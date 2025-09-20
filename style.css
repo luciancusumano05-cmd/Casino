@@ -7,7 +7,7 @@
 }
 
 body {
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); /* Deep dark blue/purple gradient */
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     color: #fff;
     min-height: 100vh;
 }
@@ -36,13 +36,13 @@ body {
     border-radius: 10px;
     text-align: center;
     max-width: 500px;
-    border: 2px solid #cba135; /* Gold border */
+    border: 2px solid #cba135;
     box-shadow: 0 0 25px rgba(203, 161, 53, 0.5);
 }
 
 .age-gate-content h2 {
     margin-bottom: 1rem;
-    color: #cba135; /* Gold */
+    color: #cba135;
 }
 
 .age-gate-content p {
@@ -52,7 +52,7 @@ body {
 }
 
 .age-gate-content button {
-    background: linear-gradient(to right, #8E0E00, #1F1C18); /* Dark red gradient */
+    background: linear-gradient(to right, #8E0E00, #1F1C18);
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -69,7 +69,7 @@ body {
 }
 
 .btn-exit {
-    background: linear-gradient(to right, #2c3e50, #1a1a1a) !important; /* Dark gray/blue */
+    background: linear-gradient(to right, #2c3e50, #1a1a1a) !important;
 }
 
 /* Main Website Header */
@@ -79,13 +79,13 @@ header {
     align-items: center;
     padding: 1rem 5%;
     background-color: rgba(0, 0, 0, 0.9);
-    border-bottom: 2px solid #8E0E00; /* Infamous red */
+    border-bottom: 2px solid #8E0E00;
 }
 
 .logo {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #cba135; /* Gold */
+    color: #cba135;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
@@ -97,7 +97,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #8E0E00; /* Red on hover */
+    color: #8E0E00;
 }
 
 .user-account {
@@ -107,7 +107,7 @@ nav a:hover {
 }
 
 .chips {
-    background: linear-gradient(135deg, #8E0E00, #1F1C18); /* Dark red gradient */
+    background: linear-gradient(135deg, #8E0E00, #1F1C18);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-weight: bold;
@@ -115,8 +115,8 @@ nav a:hover {
 }
 
 .user-account button {
-    background-color: #cba135; /* Gold */
-    color: #1a1a1a; /* Dark text */
+    background-color: #cba135;
+    color: #1a1a1a;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -129,14 +129,21 @@ nav a:hover {
     background-color: #e0b53d;
 }
 
-/* Hero Section */
+/* Updated Hero Section */
 .hero {
     text-align: center;
     padding: 5rem 1rem;
-    background: url('https://placehold.co/1200x400/222/white?text=Infamous+Online+Casino') no-repeat center center/cover;
-    background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.7);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                radial-gradient(circle at center, #8E0E00 0%, transparent 70%);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.hero-content {
+    max-width: 800px;
 }
 
 .hero h1 {
@@ -152,12 +159,20 @@ nav a:hover {
     color: #ccc;
 }
 
-.hero button {
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.hero-buttons button {
     background: #8E0E00;
     color: #fff;
     border: none;
     padding: 1rem 2.5rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
@@ -165,10 +180,14 @@ nav a:hover {
     border: 1px solid #cba135;
 }
 
-.hero button:hover {
+.hero-buttons button:hover {
     transform: translateY(-5px);
     background: #a81100;
     box-shadow: 0 10px 20px rgba(142, 14, 0, 0.3);
+}
+
+.btn-signup {
+    background: linear-gradient(135deg, #1F1C18, #8E0E00) !important;
 }
 
 /* Game Lobby */
@@ -197,6 +216,7 @@ nav a:hover {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(203, 161, 53, 0.3);
     transition: all 0.3s;
+    cursor: pointer;
 }
 
 .game-card:hover {
