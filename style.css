@@ -1,0 +1,216 @@
+/* Basic Reset & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a2a6c, #2b5876);
+    color: #fff;
+    min-height: 100vh;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Age Verification Overlay */
+#age-verification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.age-gate-content {
+    background: #222;
+    padding: 3rem;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    border: 2px solid gold;
+}
+
+.age-gate-content h2 {
+    margin-bottom: 1rem;
+    color: gold;
+}
+
+.age-gate-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.age-gate-content button {
+    background: linear-gradient(to right, #4caf50, #2e7d32);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.age-gate-content button:hover {
+    transform: scale(1.05);
+}
+
+.btn-exit {
+    background: linear-gradient(to right, #f44336, #b71c1c) !important;
+}
+
+/* Main Website Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-bottom: 2px solid gold;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: gold;
+}
+
+nav a {
+    color: #ddd;
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: gold;
+}
+
+.user-account {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.chips {
+    background: linear-gradient(135deg, #8e2de2, #4a00e0);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.user-account button {
+    background-color: gold;
+    color: #1a2a6c;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 5rem 1rem;
+    background: url('https://placehold.co/1200x400/222/white?text=Lucky+Casino+Banner') no-repeat center center/cover;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+}
+
+.hero button {
+    background: gold;
+    color: #1a2a6c;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.hero button:hover {
+    transform: translateY(-5px);
+}
+
+/* Game Lobby */
+.game-lobby {
+    padding: 3rem 5%;
+}
+
+.game-lobby h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.games-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.game-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s;
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    border-color: gold;
+}
+
+.game-placeholder {
+    background: #333;
+    height: 150px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #aaa;
+}
+
+/* Footer */
+footer {
+    background-color: #111;
+    text-align: center;
+    padding: 2rem 5%;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
