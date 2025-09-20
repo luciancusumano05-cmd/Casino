@@ -20,27 +20,28 @@
             align-items: center;
             padding: 2rem;
         }
-        .signup-container {
+        .auth-container {
             background: rgba(0, 0, 0, 0.9);
             padding: 3rem;
             border-radius: 15px;
             border: 3px solid #8E0E00;
             box-shadow: 0 0 30px rgba(142, 14, 0, 0.4);
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
         }
         .logo {
             text-align: center;
             font-size: 2.5rem;
             font-weight: bold;
             color: #cba135;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         h1 {
             text-align: center;
             margin-bottom: 2rem;
             color: #cba135;
+            font-size: 1.8rem;
         }
         .form-group {
             margin-bottom: 1.5rem;
@@ -49,6 +50,7 @@
             display: block;
             margin-bottom: 0.5rem;
             color: #ddd;
+            font-weight: 500;
         }
         input[type="text"],
         input[type="email"],
@@ -61,12 +63,13 @@
             background: #1a1a1a;
             color: #fff;
             font-size: 1rem;
+            transition: border-color 0.3s;
         }
         input:focus {
             outline: none;
             border-color: #cba135;
         }
-        .btn-signup {
+        .btn-primary {
             width: 100%;
             padding: 1rem;
             background: linear-gradient(to right, #8E0E00, #1F1C18);
@@ -77,23 +80,30 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
         }
-        .btn-signup:hover {
+        .btn-primary:hover {
             background: linear-gradient(to right, #a81100, #2b2620);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(142, 14, 0, 0.3);
         }
-        .login-link {
+        .btn-primary:disabled {
+            background: #444;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .switch-auth {
             text-align: center;
             margin-top: 2rem;
             color: #999;
         }
-        .login-link a {
+        .switch-auth a {
             color: #cba135;
             text-decoration: none;
+            font-weight: 500;
         }
-        .login-link a:hover {
+        .switch-auth a:hover {
             text-decoration: underline;
         }
         .back-button {
@@ -104,6 +114,7 @@
             padding: 0.5rem 1rem;
             border: 1px solid #666;
             border-radius: 5px;
+            transition: all 0.3s;
         }
         .back-button:hover {
             background: #333;
@@ -112,54 +123,84 @@
         .terms {
             font-size: 0.8rem;
             color: #999;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             text-align: center;
+            line-height: 1.4;
+        }
+        .terms a {
+            color: #cba135;
+            text-decoration: none;
+        }
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #ff4444;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .success-message {
+            color: #4CAF50;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body>
-    <div class="signup-container">
+    <div class="auth-container">
         <div class="logo">Infamous</div>
         <h1>Create Your Account</h1>
         
         <form id="signup-form">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" required placeholder="Choose a username">
+                <div class="error-message" id="username-error"></div>
             </div>
             
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required placeholder="your@email.com">
+                <div class="error-message" id="email-error"></div>
             </div>
             
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" required placeholder="Minimum 8 characters">
+                <div class="error-message" id="password-error"></div>
             </div>
             
             <div class="form-group">
                 <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" required>
+                <input type="password" id="confirm-password" name="confirm-password" required placeholder="Re-enter your password">
+                <div class="error-message" id="confirm-password-error"></div>
             </div>
             
             <div class="form-group">
                 <label for="birthdate">Date of Birth</label>
                 <input type="date" id="birthdate" name="birthdate" required>
+                <div class="error-message" id="birthdate-error"></div>
             </div>
             
-            <button type="submit" class="btn-signup">Become Infamous</button>
+            <button type="submit" class="btn-primary">Become Infamous</button>
         </form>
         
+        <div class="switch-auth">
+            Already have an account? <a href="login.html">Log In</a>
+        </div>
+        
         <div class="terms">
-            By signing up, you confirm you are 18+ and agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+            By signing up, you confirm you are 18+ and agree to our 
+            <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
         </div>
         
-        <div class="login-link">
-            Already have an account? <a href="#">Log In</a>
-        </div>
-        
-        <div style="text-align: center; margin-top: 2rem;">
+        <div class="button-container">
             <a href="index.html" class="back-button">← Back to Lobby</a>
         </div>
     </div>
@@ -168,27 +209,98 @@
         document.getElementById('signup-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Basic validation
+            // Reset error messages
+            const errorElements = document.querySelectorAll('.error-message');
+            errorElements.forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+
+            // Get form values
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
             const birthdate = new Date(document.getElementById('birthdate').value);
             const today = new Date();
             const age = today.getFullYear() - birthdate.getFullYear();
             
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
+            let isValid = true;
+
+            // Validate username
+            if (username.length < 3) {
+                document.getElementById('username-error').textContent = 'Username must be at least 3 characters long';
+                document.getElementById('username-error').style.display = 'block';
+                isValid = false;
             }
+
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('email-error').textContent = 'Please enter a valid email address';
+                document.getElementById('email-error').style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate password
+            if (password.length < 8) {
+                document.getElementById('password-error').textContent = 'Password must be at least 8 characters long';
+                document.getElementById('password-error').style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate password match
+            if (password !== confirmPassword) {
+                document.getElementById('confirm-password-error').textContent = 'Passwords do not match';
+                document.getElementById('confirm-password-error').style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate age
+            if (isNaN(birthdate.getTime())) {
+                document.getElementById('birthdate-error').textContent = 'Please select your date of birth';
+                document.getElementById('birthdate-error').style.display = 'block';
+                isValid = false;
+            } else if (age < 18) {
+                document.getElementById('birthdate-error').textContent = 'You must be 18 years or older to sign up';
+                document.getElementById('birthdate-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Simulate successful signup
+                alert('Account created successfully! Welcome to Infamous Online Casino.');
+                
+                // Store user data in localStorage (for demo purposes)
+                const userData = {
+                    username: username,
+                    email: email,
+                    password: password, // In real app, this would be hashed
+                    birthdate: document.getElementById('birthdate').value,
+                    chips: 1000000, // Starting chips
+                    joined: new Date().toISOString()
+                };
+                
+                localStorage.setItem('currentUser', JSON.stringify(userData));
+                localStorage.setItem('user_' + username, JSON.stringify(userData));
+                
+                // Redirect to homepage
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Basic input validation on the fly
+        document.getElementById('birthdate').addEventListener('change', function() {
+            const birthdate = new Date(this.value);
+            const today = new Date();
+            const age = today.getFullYear() - birthdate.getFullYear();
             
             if (age < 18) {
-                alert('You must be 18 years or older to sign up.');
-                return;
+                document.getElementById('birthdate-error').textContent = 'You must be 18 years or older to sign up';
+                document.getElementById('birthdate-error').style.display = 'block';
+            } else {
+                document.getElementById('birthdate-error').style.display = 'none';
             }
-            
-            // Simulate successful signup
-            alert('Account created successfully! Welcome to Infamous Online Casino.');
-            // Redirect to homepage (in a real app, you'd log them in here)
-            window.location.href = 'index.html';
         });
     </script>
 </body>
