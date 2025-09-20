@@ -61,7 +61,7 @@
             position: absolute;
             top: 0;
             width: 100%;
-            transition: top 0.1s;
+            transition: top 3s cubic-bezier(0.3, 0.1, 0.2, 1.0);
         }
         .symbol {
             height: 80px;
@@ -209,6 +209,11 @@
         const lastWinDisplay = document.getElementById('last-win');
         const betAmountInput = document.getElementById('bet-amount');
         const userStatus = document.getElementById('user-status');
+        const reelInnerElements = [
+            document.getElementById('reelInner1'),
+            document.getElementById('reelInner2'), 
+            document.getElementById('reelInner3')
+        ];
 
         // Initialize the game
         function initGame() {
@@ -238,9 +243,25 @@
             updateBetDisplay();
 
             // Populate the reels with symbols
-            const reelInnerElements = [document.getElementById('reelInner1'), document.getElementById('reelInner2'), document.getElementById('reelInner3')];
+            populateReels();
+
+            // Event Listeners
+            spinButton.addEventListener('click', spinReels);
+            betAmountInput.addEventListener('change', updateBet);
+        }
+
+        function populateReels() {
+            // Clear any existing symbols
             reelInnerElements.forEach(reel => {
-                for (let i = 0; i < 20; i++) {
+                reel.innerHTML = '';
+                reel.style.transition = 'none';
+                reel.style.top = '0px';
+            });
+
+            // Add symbols to each reel
+            reelInnerElements.forEach(reel => {
+                // Add multiple copies of symbols to create a long strip for spinning
+                for (let i = 0; i < 5; i++) { // Reduced from 20 to 5 for better performance
                     symbols.forEach(symbol => {
                         const symbolElement = document.createElement('div');
                         symbolElement.className = 'symbol';
@@ -249,10 +270,6 @@
                     });
                 }
             });
-
-            // Event Listeners
-            spinButton.addEventListener('click', spinReels);
-            betAmountInput.addEventListener('change', updateBet);
         }
 
         function updateBet() {
@@ -298,24 +315,40 @@
             // Array to hold the final symbols for each reel
             const finalSymbols = [];
 
+            // Reset reel positions before spinning
+            reelInnerElements.forEach(reel => {
+                reel.style.transition = 'none';
+                reel.style.top = '0px';
+            });
+
+            // Force a reflow to ensure the reset is applied
+            void document.body.offsetHeight;
+
             // Spin each reel with a random delay for a cascading effect
-            const reels = [document.getElementById('reelInner1'), document.getElementById('reelInner2'), document.getElementById('reelInner3')];
-            reels.forEach((reel, index) => {
+            reelInnerElements.forEach((reel, index) => {
+                // Set transition back for the spin animation
+                reel.style.transition = 'top 3s cubic-bezier(0.3, 0.1, 0.2, 1.0)';
+                
                 const randomSymbolIndex = Math.floor(Math.random() * symbols.length);
                 finalSymbols[index] = symbols[randomSymbolIndex];
 
-                const symbolPosition = -((20 * symbols.length) + randomSymbolIndex) * 80;
+                // Calculate position to land on the chosen symbol (near the end of the reel)
+                const symbolPosition = -((3 * symbols.length) + randomSymbolIndex) * 80;
 
                 setTimeout(() => {
-                    reel.style.transition = 'top 3s cubic-bezier(0.3, 0.1, 0.2, 1.0)';
                     reel.style.top = symbolPosition + 'px';
-                }, index * 200);
+                }, index * 300);
             });
 
             // Check for win after all reels have stopped
             setTimeout(() => {
                 checkWin(finalSymbols);
-            }, 3500);
+                // Reset reels for next spin after a short delay
+                setTimeout(() => {
+                    populateReels();
+                    spinButton.disabled = (playerChips < currentBet);
+                }, 1000);
+            }, 4000);
         }
 
         function checkWin(finalSymbols) {
@@ -343,9 +376,6 @@
             playerChipsDisplay.textContent = playerChips.toLocaleString();
             updateChipBalance();
             updateBetDisplay();
-
-            // Re-enable the spin button
-            spinButton.disabled = (playerChips < currentBet);
         }
 
         // Start the game when the page loads
