@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infamous Riches Slot | Infamous Online Casino</title>
+    <style>
+        /* SLOT MACHINE SPECIFIC STYLES */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #1a1a1a, #2a0c0c);
+            color: gold;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 3px solid #cba135;
+            box-shadow: 0 0 20px rgba(203, 161, 53, 0.4);
+        }
+        h1 {
+            color: #cba135;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+        .slot-machine {
+            margin: 2rem auto;
+        }
+        .reels {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        .reel {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #2c3e50, #4a235a);
+            border: 3px solid #8E0E00;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            overflow: hidden;
+            position: relative;
+        }
+        .reel-inner {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            transition: top 0.1s; /* This creates the spinning animation */
+        }
+        .symbol {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #spin-button {
+            background: linear-gradient(to bottom, #8E0E00, #6a0c0c);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+        #spin-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(142, 14, 0, 0.7);
+        }
+        #spin-button:disabled {
+            background: #444;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            min-height: 2rem;
+            margin: 1rem 0;
+        }
+        .win {
+            color: #4caf50; /* Green for win */
+            animation: pulse 0.5s infinite;
+        }
+        .lose {
+            color: #f44336; /* Red for lose */
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .player-info {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+        }
+        .bet-controls {
+            margin: 1rem 0;
+        }
+        #bet-amount {
+            background: #222;
+            color: gold;
+            border: 1px solid #cba135;
+            border-radius: 5px;
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 60px;
+            text-align: center;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #ccc;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid #666;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Infamous Riches</h1>
+        <p class="subtitle">Spin the reels and become legendary!</p>
+
+        <div class="slot-machine">
+            <div class="reels">
+                <div class="reel" id="reel1">
+                    <div class="reel-inner" id="reelInner1">
+                        <!-- Symbols will be added by JavaScript -->
+                    </div>
+                </div>
+                <div class="reel" id="reel2">
+                    <div class="reel-inner" id="reelInner2">
+                        <!-- Symbols will be added by JavaScript -->
+                    </div>
+                </div>
+                <div class="reel" id="reel3">
+                    <div class="reel-inner" id="reelInner3">
+                        <!-- Symbols will be added by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="bet-controls">
+                <label for="bet-amount">Bet: </label>
+                <input type="number" id="bet-amount" min="100" value="100" step="100">
+            </div>
+
+            <button id="spin-button">SPIN (100 chips)</button>
+
+            <div class="result" id="result"></div>
+
+            <div class="player-info">
+                <p>Your Chips: <span id="player-chips">10000</span></p>
+                <p>Last Win: <span id="last-win">0</span></p>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-button">← Back to Lobby</a>
+    </div>
+
+    <script>
+        // Game Variables
+        let playerChips = 10000; // Starting chips
+        let currentBet = 100;
+        const symbols = ['🍒', '🍋', '🍊', '🍇', '💎', '7️⃣']; // Emoji symbols
+        const payouts = {
+            '7️⃣7️⃣7️⃣': 500, // Three 7s
+            '💎💎💎': 300,  // Three diamonds
+            '🍇🍇🍇': 100   // Three grapes
+            // Other combinations will be smaller wins or no win
+        };
+
+        // DOM Elements
+        const spinButton = document.getElementById('spin-button');
+        const resultDisplay = document.getElementById('result');
+        const playerChipsDisplay = document.getElementById('player-chips');
+        const lastWinDisplay = document.getElementById('last-win');
+        const betAmountInput = document.getElementById('bet-amount');
+
+        // Initialize the game
+        function initGame() {
+            playerChipsDisplay.textContent = playerChips;
+            updateBetDisplay();
+
+            // Populate the reels with symbols
+            const reelInnerElements = [document.getElementById('reelInner1'), document.getElementById('reelInner2'), document.getElementById('reelInner3')];
+            reelInnerElements.forEach(reel => {
+                // Add multiple copies of symbols to create a long strip for spinning
+                for (let i = 0; i < 20; i++) {
+                    symbols.forEach(symbol => {
+                        const symbolElement = document.createElement('div');
+                        symbolElement.className = 'symbol';
+                        symbolElement.textContent = symbol;
+                        reel.appendChild(symbolElement);
+                    });
+                }
+            });
+
+            // Event Listeners
+            spinButton.addEventListener('click', spinReels);
+            betAmountInput.addEventListener('change', updateBet);
+        }
+
+        function updateBet() {
+            currentBet = parseInt(betAmountInput.value);
+            if (currentBet < 100) currentBet = 100;
+            if (currentBet > playerChips) currentBet = playerChips;
+            betAmountInput.value = currentBet;
+            updateBetDisplay();
+        }
+
+        function updateBetDisplay() {
+            spinButton.textContent = `SPIN (${currentBet} chips)`;
+            spinButton.disabled = (playerChips < currentBet);
+        }
+
+        // Main function to spin the reels
+        function spinReels() {
+            if (playerChips < currentBet) return;
+
+            // Deduct the bet
+            playerChips -= currentBet;
+            playerChipsDisplay.textContent = playerChips;
+
+            // Disable button during spin
+            spinButton.disabled = true;
+            resultDisplay.textContent = '';
+            resultDisplay.className = 'result';
+
+            // Array to hold the final symbols for each reel
+            const finalSymbols = [];
+
+            // Spin each reel with a random delay for a cascading effect
+            const reels = [document.getElementById('reelInner1'), document.getElementById('reelInner2'), document.getElementById('reelInner3')];
+            reels.forEach((reel, index) => {
+                // Randomly select a final symbol for this reel
+                const randomSymbolIndex = Math.floor(Math.random() * symbols.length);
+                finalSymbols[index] = symbols[randomSymbolIndex];
+
+                // Calculate a random position that will land on the chosen symbol
+                const symbolPosition = -((20 * symbols.length) + randomSymbolIndex) * 100; // 100px per symbol
+
+                // Add a delay for each reel (0s, 0.2s, 0.4s)
+                setTimeout(() => {
+                    reel.style.transition = 'top 3s cubic-bezier(0.3, 0.1, 0.2, 1.0)'; // Smooth easing function
+                    reel.style.top = symbolPosition + 'px';
+                }, index * 200);
+            });
+
+            // Check for win after all reels have stopped
+            setTimeout(() => {
+                checkWin(finalSymbols);
+            }, 3500); // Wait for the longest animation to finish
+        }
+
+        // Check if the final symbols constitute a win
+        function checkWin(finalSymbols) {
+            const result = finalSymbols.join('');
+            let winAmount = 0;
+
+            // Check for specific winning combinations
+            if (result in payouts) {
+                winAmount = currentBet * payouts[result];
+            }
+            // Simple win for any two matching symbols (smaller win)
+            else if (finalSymbols[0] === finalSymbols[1] || finalSymbols[1] === finalSymbols[2] || finalSymbols[0] === finalSymbols[2]) {
+                winAmount = currentBet * 2;
+            }
+
+            // Process the result
+            if (winAmount > 0) {
+                playerChips += winAmount;
+                resultDisplay.textContent = `YOU WIN ${winAmount} CHIPS!`;
+                resultDisplay.className = 'result win';
+                lastWinDisplay.textContent = winAmount;
+            } else {
+                resultDisplay.textContent = 'NO WIN. TRY AGAIN!';
+                resultDisplay.className = 'result lose';
+            }
+
+            playerChipsDisplay.textContent = playerChips;
+            updateBetDisplay();
+
+            // Re-enable the spin button
+            spinButton.disabled = (playerChips < currentBet);
+        }
+
+        // Start the game when the page loads
+        window.onload = initGame;
+    </script>
+</body>
+</html>
